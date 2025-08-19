@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lámina y Acero La Metálica</title>
+  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <div class="logo-container">
+        <img src="img-logo.png" alt="Logo" class="logo">
+        <span class="empresa-nombre">Lámina y Acero La Metálica</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#productos" class="btn">Productos</a></li>
+            <li><a href="#nosotros" class="btn secundario">Nosotros</a></li>
+            <li><a href="#ubicacion-horarios" class="btn">Ubicación & Horarios</a></li>
+        </ul>
+    </nav>
+    <button id="modo-oscuro-toggle" title="Cambiar modo oscuro">🌙</button>
+</header>
+
+
+<!-- GALERÍA DE PRODUCTOS -->
+<section id="productos">
+  <h2>Productos</h2>
+  <div class="productos-container">
+
+    <div class="producto" data-images='["imagenes/lamina-fria.png","imagenes/lamina-fria1.jpg","imagenes/lamina-fria2.jpg","imagenes/lamina-fria3.jpg"]'>
+      <img src="imagenes/lamina-fria1.jpg" alt="Lámina fría">
+      <h3>Lámina Fría</h3>
+    </div>
+
+    <div class="producto" data-images='["imagenes/lamina-galvanizada.png","imagenes/lamina-galvanizada1.jpg","imagenes/lamina-galvanizada2.jpg"]'>
+      <img src="imagenes/lamina-galvanizada1.jpg" alt="Lámina galvanizada">
+      <h3>Lámina Galvanizada</h3>
+    </div>
+
+    <div class="producto" data-images='["imagenes/rollos-lamina.jpg","imagenes/rollos-lamina1.jpg","imagenes/rollos-lamina2.jpg","imagenes/rollos-lamina3.jpg"]'>
+      <img src="imagenes/rollos-lamina1.jpg" alt="Rollos de lámina">
+      <h3>Rollos de Lámina</h3>
+    </div>
+
+    <div class="producto" data-images='["imagenes/cortes-especiales.png","imagenes/cortes-especiales2.jpg"]'>
+      <img src="imagenes/cortes-especiales.png" alt="Cortes especiales">
+      <h3>Cortes Especiales</h3>
+    </div>
+
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const placeholder = "imagenes/placeholder.png";
+
+  document.querySelectorAll(".producto").forEach(producto => {
+    const img = producto.querySelector("img");
+    let images = [];
+
+    try {
+      images = JSON.parse(producto.getAttribute("data-images")) || [];
+    } catch(e) {
+      images = [];
+    }
+
+    if (images.length === 0) {
+      img.src = placeholder;
+      return;
+    }
+
+    if (images.length === 1) {
+      img.src = images[0];
+      return;
+    }
+
+    let index = 0;
+    let interval;
+
+    const changeImage = () => {
+      img.classList.add("fade-out");
+      setTimeout(() => {
+        index = (index + 1) % images.length;
+        img.src = images[index];
+        img.offsetHeight; // forzar reflow para fade
+        img.classList.remove("fade-out");
+      }, 600);
+    };
+
+    const startSlider = () => interval = setInterval(changeImage, 2500);
+    const stopSlider = () => clearInterval(interval);
+
+    producto.addEventListener("mouseenter", stopSlider);
+    producto.addEventListener("mouseleave", startSlider);
+
+    startSlider();
+  });
+});
+</script>
+
+
+<section class="catalogo">
+  <h2>Catálogo de Productos</h2>
+
+  <!-- Lámina en Hoja Fría -->
+  <div class="catalogo-section">
+    <div class="catalogo-header">
+      <img src="imagenes/icono-lamina.png" alt="Lámina en Hoja Fría">
+      <h3>Lámina en Hoja Fría</h3>
+    </div>
+    <table class="catalogo-table">
+      <thead>
+        <tr>
+          <th>Calibres</th>
+          <th>Medidas Comerciales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>14, 16, 18, 19, 20, 21, 22, 23, 24, 26</td>
+          <td>3' x 6', 3' x 8', 3' x 10', 4' x 6', 4' x 8', 4' x 10'</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Rollos de Lámina Fría -->
+  <div class="catalogo-section">
+    <div class="catalogo-header">
+      <img src="imagenes/icono-rollo.png" alt="Rollos de Lámina Fría">
+      <h3>Rollos de Lámina Fría</h3>
+    </div>
+    <table class="catalogo-table">
+      <thead>
+        <tr>
+          <th>Calibres</th>
+          <th>Anchos Disponibles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>14, 16, 18, 19, 20, 21, 22, 23, 24, 26</td>
+          <td>3', 4'</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Lámina en Hoja Galvanizada -->
+  <div class="catalogo-section">
+    <div class="catalogo-header">
+      <img src="imagenes/icono-lamina-galv.png" alt="Lámina en Hoja Galvanizada">
+      <h3>Lámina en Hoja Galvanizada</h3>
+    </div>
+    <table class="catalogo-table">
+      <thead>
+        <tr>
+          <th>Calibres</th>
+          <th>Medidas Comerciales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>14, 16, 18, 20, 22, 24</td>
+          <td>3' x 6', 3' x 8', 3' x 10', 4' x 6', 4' x 8', 4' x 10'</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Rollos de Lámina Galvanizada -->
+  <div class="catalogo-section">
+    <div class="catalogo-header">
+      <img src="imagenes/icono-rollo-galv.png" alt="Rollos de Lámina Galvanizada">
+      <h3>Rollos de Lámina Galvanizada</h3>
+    </div>
+    <table class="catalogo-table">
+      <thead>
+        <tr>
+          <th>Calibres</th>
+          <th>Anchos Disponibles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>14, 16, 18, 20, 22, 24</td>
+          <td>3', 4'</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+<!-- SECCIÓN NOSOTROS -->
+<section id="nosotros">
+  <h2>Sobre Nosotros</h2>
+  <p class="nosotros-descripcion">
+    En Lámina y Acero La Metálica operamos desde 2009, ofreciendo soluciones integrales en lámina y acero con un firme compromiso hacia la calidad, la innovación y la satisfacción total de nuestros clientes.
+    <br><br>
+    Nuestra trayectoria de más de 15 años en el sector nos ha consolidado como un referente, brindando productos de alta durabilidad y un servicio personalizado que se adapta con precisión a las necesidades de cada proyecto.
+  </p>
+
+  <div class="valores-container">
+    <div class="valor">
+      <img src="imagenes/icono-calidad.png" alt="Calidad">
+      <h3>Calidad</h3>
+      <p>Productos con altos estándares y máxima durabilidad.</p>
+    </div>
+
+    <div class="valor">
+      <img src="imagenes/icono-atencion.png" alt="Atención Personalizada">
+      <h3>Atención Personalizada</h3>
+      <p>Soluciones adaptadas a cada cliente y proyecto.</p>
+    </div>
+
+    <div class="valor">
+      <img src="imagenes/icono-experiencia.png" alt="Experiencia">
+      <h3>Experiencia</h3>
+      <p>Más de 15 años ofreciendo soluciones confiables en el sector.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACTO -->
+<section class="contacto">
+  <h2><i class="fas fa-phone"></i> Contáctanos</h2>
+
+  <div class="contacto-info">
+    <p>
+      <strong>Teléfono:</strong> 
+      <a href="tel:+525557501823" style="color: inherit; text-decoration: none;">
+        +52 55 9720 9764
+      </a>
+    </p>
+    <p>
+      <strong>Email:</strong> 
+      <a href="mailto:facturas-lametalica@ciamatusa.com.mx">
+        facturas-lametalica@ciamatusa.com.mx
+      </a>
+    </p>
+    <p>Estamos listos para ayudarte con tus proyectos de lámina y acero. ¡Envíanos un mensaje!</p>
+  </div>
+
+<form id="contact-form" action="https://formspree.io/f/xrblonnz" method="POST" class="form-formal">
+    <input type="text" name="nombre" placeholder="Tu nombre" required>
+    <input type="email" name="correo" placeholder="Tu correo" required>
+    <input type="tel" name="telefono" placeholder="Tu número de teléfono" required pattern="[0-9]{10}" title="Ingresa un número de 10 dígitos">
+    <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
+    <button type="submit">Enviar mensaje</button>
+</form>
+
+
+</section>
+
+    <!-- Mapa & horarios -->
+
+<section id="ubicacion-horarios">
+  <h2>Ubicación & Horarios</h2>
+
+  <div class="mapa-horarios">
+    <!-- Mapa -->
+    <div class="mapa">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15046.67616612584!2d-99.1124147!3d19.469831!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f978fd7a26c9%3A0xcb52e4aaecd9961a!2sF.C.%20Hidalgo%20210%2C%20Arag%C3%B3n%20La%20Villa(Arag%C3%B3n)%2C%20Gustavo%20A.%20Madero%2C%2007000%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1754692309903!5m2!1ses-419!2smx"
+        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <a class="link-maps" href="https://maps.app.goo.gl/aLerGW9dhS3RDWmt9" target="_blank" rel="noopener noreferrer">
+        📍 Ver en Google Maps
+      </a>
+    </div>
+
+    <!-- Horarios -->
+
+<ul class="horario-card">
+  <li data-dias="1-5" data-abre="09:00" data-cierra="18:00">
+    <span class="dia">Lunes a Viernes</span>
+    <span class="hora">9:00 AM – 6:00 PM</span>
+    <span class="estado"></span>
+  </li>
+  <li data-dias="6" data-abre="09:00" data-cierra="10:30">
+    <span class="dia">Sábado</span>
+    <span class="hora">9:00 AM – 10:30 AM</span>
+    <span class="estado"></span>
+  </li>
+  <li data-dias="0">
+    <span class="dia">Domingo</span>
+    <span class="hora">Cerrado</span>
+    <span class="estado"></span>
+  </li>
+</ul>
+
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const hoy = new Date().getDay();
+  const horaActual = new Date().toTimeString().slice(0,5);
+  const items = document.querySelectorAll(".horario-card li");
+
+  items.forEach(item => {
+    const diasAttr = item.getAttribute("data-dias");
+    const abre = item.getAttribute("data-abre");
+    const cierra = item.getAttribute("data-cierra");
+    const estadoElem = item.querySelector(".estado");
+
+    let dias = [];
+    if (diasAttr.includes("-")) {
+      let [start, end] = diasAttr.split("-").map(Number);
+      for (let d = start; d <= end; d++) dias.push(d);
+    } else {
+      dias = diasAttr.split(",").map(Number);
+    }
+
+    if (dias.includes(hoy)) {
+      item.classList.add("hoy");
+
+      if (abre && cierra) {
+        if (horaActual >= abre && horaActual <= cierra) {
+          estadoElem.textContent = "Abierto ahora";
+          estadoElem.classList.add("abierto");
+        } else {
+          estadoElem.textContent = "Cerrado ahora";
+          estadoElem.classList.add("cerrado");
+        }
+      } else {
+        estadoElem.textContent = "Cerrado";
+        estadoElem.classList.add("cerrado");
+      }
+    }
+  });
+});
+
+</script>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Lámina y Acero La Metálica</span> | 
+    Todos los derechos reservados. | 
+    <a href="politica-privacidad.html">Política de Privacidad</a>
+  </p>
+</footer>
+
+
+  <script>
+// --- Scroll suave para los enlaces del menú ---
+document.querySelectorAll('nav a[href^="#"]').forEach(enlace => {
+    enlace.addEventListener("click", function(e) {
+        e.preventDefault();
+        const destino = document.querySelector(this.getAttribute("href"));
+        if (destino) {
+            destino.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    });
+});
+</script>
+
+<!-- ====================== BANNER DE COOKIES PREMIUM ====================== -->
+<div id="cookie-banner" style="
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 980px;
+    margin: auto;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+">
+    <div style="flex:1;font-size: 0.95rem; color: #2C2C2C;">
+        Usamos cookies propias y de terceros para mejorar la experiencia. Al continuar navegas aceptando su uso.
+        <a href="privacidad.html" style="margin-left:8px; text-decoration:underline; color:#2C5F2D;">Más info</a>
+    </div>
+    <button id="cookie-accept" style="
+        background: linear-gradient(135deg,#2C5F2D,#4CAF50);
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    ">Aceptar</button>
+</div>
+
+<script>
+(function(){
+    const banner = document.getElementById('cookie-banner');
+    const boton = document.getElementById('cookie-accept');
+
+    // Mostrar banner si no se aceptaron cookies
+    if (localStorage.getItem('cookies_aceptadas') !== '1') {
+        setTimeout(() => {
+            banner.style.opacity = '1';
+            banner.style.transform = 'translateY(0)';
+        }, 300); // pequeño delay para animación
+    } else {
+        banner.style.display = 'none';
+    }
+
+    // Al aceptar cookies
+    boton.addEventListener('click', function(){
+        localStorage.setItem('cookies_aceptadas','1');
+        banner.style.opacity = '0';
+        banner.style.transform = 'translateY(40px)';
+        setTimeout(() => banner.style.display = 'none', 500);
+    });
+})();
+</script>
+
+<!-- ====================== MODO OSCURO BOTON ====================== -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const btnModoOscuro = document.getElementById("modo-oscuro-toggle");
+    if (!btnModoOscuro) return;
+
+    // Aplicar preferencia guardada
+    if (localStorage.getItem("modoOscuro") === "true") {
+        document.body.classList.add("modo-oscuro");
+    }
+
+    // Alternar y guardar preferencia
+    btnModoOscuro.addEventListener("click", function () {
+        document.body.classList.toggle("modo-oscuro");
+        localStorage.setItem("modoOscuro", document.body.classList.contains("modo-oscuro"));
+    });
+});
+</script>
+
+<!-- ====================== AVISO OFICIAL ====================== -->
+<div id="aviso-oficial" class="aviso-overlay" style="display:none;">
+  <div class="aviso-box">
+    <h2>⚠️ Aviso Importante</h2>
+    <p>
+      Bienvenido a la <strong>única página oficial</strong> de 
+      <span style="color:#3b82f6; font-weight:600;">Lámina y Acero La Metálica</span>.
+    </p>
+    <p>
+      Le recordamos que <strong>no realizamos operaciones</strong> a través de sitios distintos ni con terceros no autorizados.  
+      <br>Evite fraudes y confirme siempre con nosotros directamente.
+    </p>
+    <button id="cerrar-aviso">Entendido</button>
+
+    <!-- Logo al pie tipo firma -->
+    <div class="aviso-firma">
+      <img src="img-logo.png" alt="Logo La Metálica">
+      <p>Atentamente,<br><strong>Lámina y Acero La Metálica</strong></p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const aviso = document.getElementById("aviso-oficial");
+  const btn = document.getElementById("cerrar-aviso");
+
+  // Mostrar solo si no se ha aceptado en esta sesión
+  if (!sessionStorage.getItem("avisoAceptado")) {
+    aviso.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Bloquear scroll
+  }
+
+  btn.addEventListener("click", () => {
+    aviso.style.display = "none";
+    document.body.style.overflow = ""; // Restaurar scroll
+    sessionStorage.setItem("avisoAceptado", "true"); // Guardar aceptación
+  });
+});
+</script>
+
+</body>
+</html>
