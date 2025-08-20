@@ -495,6 +495,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+  
+  <script>
+  function ajustarBody() {
+    const header = document.querySelector("header");
+    const body = document.body;
+    if (window.innerWidth <= 768) {
+      const alto = header.offsetHeight + "px";
+      body.style.setProperty("--header-height", alto);
+      body.classList.add("has-fixed-header");
+    } else {
+      body.classList.remove("has-fixed-header");
+      body.style.removeProperty("--header-height");
+    }
+  }
+
+  window.addEventListener("resize", ajustarBody);
+  window.addEventListener("load", ajustarBody);
+</script>
+
 
 </body>
 </html>
