@@ -633,9 +633,4 @@ nav a.btn {
   }
 }
 
-/* ✅ Ajuste automático del espacio cuando header es fijo */
-body.has-fixed-header {
-  margin-top: var(--header-height, 100px);
-}
-
 }
