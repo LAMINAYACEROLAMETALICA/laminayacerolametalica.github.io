@@ -498,11 +498,9 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  position: relative;   /* ✅ Desktop: normal (se desliza) */
+  position: relative;
   flex-wrap: wrap;
   background-color: var(--bg-color);
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .logo-container {
@@ -522,13 +520,13 @@ header {
 }
 
 nav {
-  overflow-x: visible;
+  overflow-x: visible; /* Desktop: nav fluye normalmente */
   white-space: normal;
 }
 
 nav ul {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* Desktop: fila horizontal */
   gap: 15px;
   list-style: none;
   padding: 0;
@@ -560,6 +558,7 @@ nav a.btn {
     align-items: center;
     text-align: center;
     padding: 15px 20px;
+  }
 
   .logo-container {
     flex-direction: column;
@@ -599,12 +598,26 @@ nav a.btn {
 
 /* ==================== MEDIA QUERY CELULAR (max 480px) ==================== */
 @media (max-width: 480px) {
+  header {
+    padding: 8px 12px;
+  }
+
   .logo-container img.logo {
     max-width: 120px;
   }
 
   .empresa-nombre {
     font-size: 0.9rem;
+  }
+
+  nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
   }
 
   nav ul {
@@ -624,5 +637,6 @@ nav a.btn {
     font-size: 1rem;
   }
 }
+
 
 }
