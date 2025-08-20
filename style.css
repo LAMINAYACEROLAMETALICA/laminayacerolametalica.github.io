@@ -498,9 +498,11 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  position: relative;   /* ✅ Desktop: normal, no se queda fijo */
+  position: relative;   /* ✅ Desktop: normal */
   flex-wrap: wrap;
   background-color: var(--bg-color);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo-container {
@@ -520,13 +522,13 @@ header {
 }
 
 nav {
-  overflow-x: visible; /* Desktop: nav fluye normalmente */
+  overflow-x: visible;
   white-space: normal;
 }
 
 nav ul {
   display: flex;
-  flex-direction: row; /* Desktop: fila horizontal */
+  flex-direction: row;
   gap: 15px;
   list-style: none;
   padding: 0;
@@ -559,16 +561,12 @@ nav a.btn {
     text-align: center;
     padding: 15px 20px;
 
-    /* ✅ Tablet/móvil: header fijo */
+    /* ✅ header fijo */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-  }
-
-  body {
-    padding-top: 120px; /* Empuja el contenido para que no quede debajo del header */
   }
 
   .logo-container {
@@ -609,37 +607,12 @@ nav a.btn {
 
 /* ==================== MEDIA QUERY CELULAR (max 480px) ==================== */
 @media (max-width: 480px) {
-  header {
-    padding: 8px 12px;
-
-    /* ✅ Sigue fijo también en celulares */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
-  body {
-    padding-top: 100px; /* ajusta para que no tape el logo/menu */
-  }
-
   .logo-container img.logo {
     max-width: 120px;
   }
 
   .empresa-nombre {
     font-size: 0.9rem;
-  }
-
-  nav {
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-  }
-
-  nav::-webkit-scrollbar {
-    display: none;
   }
 
   nav ul {
@@ -660,52 +633,8 @@ nav a.btn {
   }
 }
 
-
-  nav a.btn {
-    flex: 0 0 auto;
-    padding: 6px 14px;
-    font-size: 0.9rem;
-  }
+/* ✅ Ajuste automático del espacio */
+body.has-fixed-header {
+  margin-top: var(--header-height, 100px);
 }
-
-/* ==================== MEDIA QUERY CELULAR (max 480px) ==================== */
-@media (max-width: 480px) {
-  header {
-    padding: 8px 12px;
-  }
-
-  .logo-container img.logo {
-    max-width: 120px;
-  }
-
-  .empresa-nombre {
-    font-size: 0.9rem;
-  }
-
-  nav {
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-  }
-
-  nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  nav ul {
-    flex-direction: row;
-    gap: 6px;
-    justify-content: center;
-  }
-
-  nav a.btn {
-    font-size: 0.85rem;
-    padding: 5px 10px;
-  }
-
-  #modo-oscuro-toggle {
-    top: 8px;
-    right: 8px;
-    font-size: 1rem;
-  }
 }
