@@ -498,7 +498,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
-  position: relative;   /* ✅ Desktop: normal */
+  position: relative;   /* ✅ Desktop: normal (se desliza) */
   flex-wrap: wrap;
   background-color: var(--bg-color);
   width: 100%;
@@ -561,7 +561,7 @@ nav a.btn {
     text-align: center;
     padding: 15px 20px;
 
-    /* ✅ header fijo */
+    /* ✅ En móviles/tablets el header se fija arriba */
     position: fixed;
     top: 0;
     left: 0;
@@ -633,8 +633,9 @@ nav a.btn {
   }
 }
 
-/* ✅ Ajuste automático del espacio */
+/* ✅ Ajuste automático del espacio cuando header es fijo */
 body.has-fixed-header {
   margin-top: var(--header-height, 100px);
 }
+
 }
