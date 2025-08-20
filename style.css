@@ -561,14 +561,6 @@ nav a.btn {
     text-align: center;
     padding: 15px 20px;
 
-    /* ✅ En móviles/tablets el header se fija arriba */
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
   .logo-container {
     flex-direction: column;
     gap: 5px;
